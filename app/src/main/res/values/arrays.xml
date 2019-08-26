@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="plus_tone">
+        <string>A</string>
+        <string>A#</string>
+        <string>B</string>
+        <string>C</string>
+        <string>C#</string>
+        <string>D</string>
+        <string>D#</string>
+        <string>E</string>
+        <string>F</string>
+        <string>F#</string>
+        <string>G</string>
+        <string>G#</string>
+    </string-array>
+
+    <string-array name="drop_tone">
+        <string>A</string>
+        <string>Bb</string>
+        <string>B</string>
+        <string>C</string>
+        <string>Db</string>
+        <string>D</string>
+        <string>Eb</string>
+        <string>E</string>
+        <string>F</string>
+        <string>Gb</string>
+        <string>G</string>
+        <string>Ab</string>
+    </string-array>
+</resources>
