@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Scale Generator</string>
+    <string name="title_main_activity">スケールリスト生成くん</string>
 </resources>
