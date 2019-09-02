@@ -9,14 +9,38 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/title_main_activity" />
+        android:text="@string/title_main_activity"
+        android:textSize="24sp" />
+
+        <RadioGroup
+            android:id="@+id/tone_select_Radio"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/tone_select_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="@string/radio_button_left" />
+
+        <RadioButton
+            android:id="@+id/tone_select_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="@string/radio_button_right" />
+        </RadioGroup>
+
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
         android:background="#FFFFFF"
         android:orientation="horizontal">
 
@@ -24,13 +48,16 @@
             android:id="@+id/left_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
             android:entries="@array/drop_tone"/>
 
         <Spinner
             android:id="@+id/right_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
             android:entries="@array/scale_list"/>
+
     </LinearLayout>
 
 
