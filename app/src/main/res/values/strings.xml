@@ -3,4 +3,7 @@
     <string name="title_main_activity">スケールリスト生成くん</string>
     <string name="radio_button_left">b表示</string>
     <string name="radio_button_right">#表示</string>
+    <string name="no_implement">ラジオボタンはまだ有効ではないんだなぁ</string>
+    <string name="rd_box_practice_btname">ラジオボタンの実装</string>
+    <string name="disp_sort_string">ここにsubStringで切り出した文言を表示したい</string>
 </resources>

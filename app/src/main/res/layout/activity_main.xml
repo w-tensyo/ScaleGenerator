@@ -14,32 +14,39 @@
         android:text="@string/title_main_activity"
         android:textSize="24sp" />
 
-        <RadioGroup
-            android:id="@+id/tone_select_Radio"
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+    <TextView
+        android:id="@+id/no_implement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/no_implement"/>
 
-        <RadioButton
-            android:id="@+id/tone_select_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="@string/radio_button_left" />
+            <RadioGroup
+                android:id="@+id/tone_select_Radio"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/tone_select_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="@string/radio_button_right" />
-        </RadioGroup>
+            <RadioButton
+                android:id="@+id/tone_select_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="@string/radio_button_left" />
 
+            <RadioButton
+                android:id="@+id/tone_select_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="@string/radio_button_right" />
+            </RadioGroup>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="#FFFFFF"
         android:orientation="horizontal">
@@ -60,5 +67,24 @@
 
     </LinearLayout>
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/sort_tone_string"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/disp_sort_string"/>
+        <Button
+            android:id="@+id/rd_box_practice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="@string/rd_box_practice_btname"/>
+    </LinearLayout>
 </LinearLayout>
