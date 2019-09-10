@@ -21,19 +21,19 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/tone_select_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="@string/radio_button_left" />
+            <RadioButton
+                android:id="@+id/tone_select_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="@string/radio_button_left" />
 
-        <RadioButton
-            android:id="@+id/tone_select_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="@string/radio_button_right" />
+            <RadioButton
+                android:id="@+id/tone_select_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="@string/radio_button_right" />
         </RadioGroup>
 
 
@@ -48,15 +48,13 @@
             android:id="@+id/left_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:entries="@array/drop_tone"/>
+            android:layout_marginLeft="16dp"/>
 
         <Spinner
             android:id="@+id/right_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:entries="@array/scale_list"/>
+            android:layout_marginLeft="16dp"/>
 
     </LinearLayout>
 
