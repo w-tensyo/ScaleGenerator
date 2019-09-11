@@ -80,11 +80,5 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:text="@string/disp_sort_string"/>
-        <Button
-            android:id="@+id/rd_box_practice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="@string/rd_box_practice_btname"/>
     </LinearLayout>
 </LinearLayout>
