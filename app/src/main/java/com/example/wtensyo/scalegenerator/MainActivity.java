@@ -23,11 +23,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //ここにスピナーを呼ぶ
-        leftSpinner();
+        getLeftSpinner();
 
     }
 
-    public void leftSpinner() {
+    public void getLeftSpinner() {
         //データ型変数leftSpinnerにleft_spinnerを入れる
         Spinner leftSpinner = (Spinner) findViewById(R.id.left_spinner);
         //array.xmlに記載したstring-arrayのplus_toneをadapter変数に入れる
@@ -99,7 +99,12 @@ public class MainActivity extends AppCompatActivity {
                         item = sortToneUtil(26, 54);
                         break;
                 }
+                //本来は不要。一旦配列用に切り出したStringが正しく切り出されているかここで確認。
                 dispSortTone.setText(item);
+
+                //itemの中身を配列化させる
+                String [] toneList = makeArray(item);
+
             }
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -108,10 +113,16 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String SORT_STRING = "A,A#,B,C,C#,D,D#,E,F,F#,G,G#,A,A#,B,C,C#,D,D#,E,F,F#,G,";
 
-    //配列のソートを行う処理を描きたい
+    //配列用の下準備。配列の先頭がどこになるか。をこれで切り出す
     static String sortToneUtil(int i, int j) {
         String result = SORT_STRING.substring(i, j);
         //Spinnerで選択したIndex番号を
         return result;
-        }
+    }
+
+    //sortToneUtilで切り出した文字列を配列化させる処理
+    static String[] makeArray(String a){
+        String[] toneMake = a.split(",");
+        return toneMake;
+    }
 }
