@@ -7,9 +7,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,36 +22,50 @@ public class MainActivity extends AppCompatActivity {
     Spinner rightSpinner;
     String[] selectTone;
     String item = null;
+    List<String> toneList;
+
+    TextView dispSortTone = (TextView) findViewById(R.id.sort_tone_string);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //ここにスピナーを呼ぶ
+
+        //activity_main.xmlのlvMenuを認識させるために呼び出し
+        ListView lvMenu = findViewById(R.id.lvMenu);
+        //まずはgetLeftSpinnerでLeftSpinnerでtoneListに配列を突っ込む
         getLeftSpinner();
+
+        //getLeftSpinner内で作った配列toneListをAdapterに登録
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this,android.R.layout.simple_list_item_1,toneList);
+
+        //lvMenuにadapterをセット
+        lvMenu.setAdapter(adapter);
 
     }
 
     public void getLeftSpinner() {
         //データ型変数leftSpinnerにleft_spinnerを入れる
         Spinner leftSpinner = (Spinner) findViewById(R.id.left_spinner);
+
         //array.xmlに記載したstring-arrayのplus_toneをadapter変数に入れる
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.plus_tone, android.R.layout.simple_spinner_item);
+
         //leftSpinner変数にplus_toneのstring-arrayを代入した変数"adapter"を代入する
         leftSpinner.setAdapter(adapter);
-        //アダプタがスピナーの選択肢の一覧を表示するのに使うレイアウトを指定 と書いてあるけど理解はできていない・・・。
+
+        //アダプタがスピナーの選択肢の一覧を表示するのに使うレイアウトを指定。
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         leftSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView parent, View view, int position, long id) {
                 Spinner spinner = (Spinner) parent;
-                //せんたくされているアイテムのIndexを取得
-                //int idx = leftSpinner.getSelectedItemPosition();
 
-                TextView dispSortTone = (TextView) findViewById(R.id.sort_tone_string);
-
+                //選択されているアイテムのIndexを取得
                 int idx = spinner.getSelectedItemPosition();
+
                 //〜〜〜ここでindexをsrotToneに処理させて、ソートを済ませたい〜〜〜
                 //ケース毎に引数を渡して、sortToneで処理させたい
                 switch (idx) {
@@ -103,7 +122,8 @@ public class MainActivity extends AppCompatActivity {
                 dispSortTone.setText(item);
 
                 //itemの中身を配列化させる
-                String [] toneList = makeArray(item);
+                //これで、toneLisの中に配列ができあがっている想定
+                toneList = makeArray(item);
 
             }
             public void onNothingSelected(AdapterView<?> parent) {
@@ -120,9 +140,9 @@ public class MainActivity extends AppCompatActivity {
         return result;
     }
 
-    //sortToneUtilで切り出した文字列を配列化させる処理
-    static String[] makeArray(String a){
-        String[] toneMake = a.split(",");
+    //sortToneUtilで切り出した文字列をList<String>で配列化させる処理
+    static List<String> makeArray(String a){
+        List<String> toneMake = Arrays.asList(a.split(","));
         return toneMake;
     }
 }
