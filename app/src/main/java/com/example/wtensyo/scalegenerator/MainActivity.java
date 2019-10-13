@@ -23,8 +23,7 @@ public class MainActivity extends AppCompatActivity {
     String[] selectTone;
     String item = null;
     List<String> toneList;
-
-    TextView dispSortTone = (TextView) findViewById(R.id.sort_tone_string);
+    TextView dispSortTone;
 
 
     @Override
@@ -34,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
         //activity_main.xmlのlvMenuを認識させるために呼び出し
         ListView lvMenu = findViewById(R.id.lvMenu);
+
+        dispSortTone = (TextView) findViewById(R.id.sort_tone_string);
+
         //まずはgetLeftSpinnerでLeftSpinnerでtoneListに配列を突っ込む
         getLeftSpinner();
 
