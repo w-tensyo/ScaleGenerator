@@ -22,9 +22,12 @@ public class MainActivity extends AppCompatActivity {
     Spinner rightSpinner;
     String[] selectTone;
     String item = null;
-    List<String> toneList;
+    ListView lvMenu;
+    ArrayList<String> toneList = new ArrayList<>();
     TextView dispSortTone;
 
+
+    private static final String SORT_STRING = "A,A#,B,C,C#,D,D#,E,F,F#,G,G#,A,A#,B,C,C#,D,D#,E,F,F#,G,";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +35,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //activity_main.xmlのlvMenuを認識させるために呼び出し
-        ListView lvMenu = findViewById(R.id.lvMenu);
+        lvMenu = findViewById(R.id.lvMenu);
 
         dispSortTone = (TextView) findViewById(R.id.sort_tone_string);
 
         //まずはgetLeftSpinnerでLeftSpinnerでtoneListに配列を突っ込む
         getLeftSpinner();
+
 
         //getLeftSpinner内で作った配列toneListをAdapterに登録
         ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this,android.R.layout.simple_list_item_1,toneList);
@@ -60,91 +64,88 @@ public class MainActivity extends AppCompatActivity {
         //アダプタがスピナーの選択肢の一覧を表示するのに使うレイアウトを指定。
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        leftSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
-            @Override
-            public void onItemSelected(AdapterView parent, View view, int position, long id) {
-                Spinner spinner = (Spinner) parent;
-
-                //選択されているアイテムのIndexを取得
-                int idx = spinner.getSelectedItemPosition();
-
-                //〜〜〜ここでindexをsrotToneに処理させて、ソートを済ませたい〜〜〜
-                //ケース毎に引数を渡して、sortToneで処理させたい
-                switch (idx) {
-                    case 0:
-                        //A,A#,B,C,C#,D,D#,E,F,F#,G,G#にソートする
-                        item = sortToneUtil(0, 28);
-                        break;
-                    case 1:
-                        //A#,B,C,C#,D,D#,E,F,F#,G,G#,Aにソートする
-                        item = sortToneUtil(2, 30);
-                        break;
-                    case 2:
-                        //B,C,C#,D,D#,E,F,F#,G,G#,A,A#にソートする
-                        item = sortToneUtil(5, 33);
-                        break;
-                    case 3:
-                        //C,C#,D,D#,E,F,F#,G,G#,A,A#,Bにソートする
-                        item = sortToneUtil(7, 35);
-                        break;
-                    case 4:
-                        //C#,D,D#,E,F,F#,G,G#,A,A#,B,Cにソートする
-                        item = sortToneUtil(9, 37);
-                        break;
-                    case 5:
-                        //D,D#,E,F,F#,G,G#,A,A#,B,C,C#にソートする
-                        item = sortToneUtil(12, 40);
-                        break;
-                    case 6:
-                        //D#,E,F,F#,G,G#,A,A#,B,C,C#,Dにソートする
-                        item = sortToneUtil(14, 42);
-                        break;
-                    case 7:
-                        //E,F,F#,G,G#,A,A#,B,C,C#,D,D#にソートする
-                        item = sortToneUtil(17, 45);
-                        break;
-                    case 8:
-                        //F,F#,G,G#,A,A#,B,C,C#,D,D#,Eにソートする
-                        item = sortToneUtil(19, 47);
-                        break;
-                    case 9:
-                        //F#,G,G#,A,A#,B,C,C#,D,D#,E,Fにソートする
-                        item = sortToneUtil(21, 49);
-                        break;
-                    case 10:
-                        //G,G#,A,A#,B,C,C#,D,D#,E,F,F#にソートする
-                        item = sortToneUtil(24, 52);
-                        break;
-                    case 11:
-                        //G#,A,A#,B,C,C#,D,D#,E,F,F#,Gにソートする
-                        item = sortToneUtil(26, 54);
-                        break;
-                }
-                //本来は不要。一旦配列用に切り出したStringが正しく切り出されているかここで確認。
-                dispSortTone.setText(item);
-
-                //itemの中身を配列化させる
-                //これで、toneLisの中に配列ができあがっている想定
-                toneList = makeArray(item);
-
-            }
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-            });
-        }
-
-    private static final String SORT_STRING = "A,A#,B,C,C#,D,D#,E,F,F#,G,G#,A,A#,B,C,C#,D,D#,E,F,F#,G,";
-
-    //配列用の下準備。配列の先頭がどこになるか。をこれで切り出す
-    static String sortToneUtil(int i, int j) {
-        String result = SORT_STRING.substring(i, j);
-        //Spinnerで選択したIndex番号を
-        return result;
+        leftSpinner.setOnItemSelectedListener(new SpinnerSelectedListener());
     }
 
-    //sortToneUtilで切り出した文字列をList<String>で配列化させる処理
-    static List<String> makeArray(String a){
-        List<String> toneMake = Arrays.asList(a.split(","));
-        return toneMake;
+
+    public class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener{
+        public void onItemSelected(AdapterView parent, View view, int position, long id) {
+            Spinner spinner = (Spinner) parent;
+
+            //選択されているアイテムのIndexを取得
+            int idx = spinner.getSelectedItemPosition();
+
+            //〜〜〜ここでindexをsrotToneに処理させて、ソートを済ませたい〜〜〜
+            //ケース毎に引数を渡して、sortToneで処理させたい
+            switch (idx) {
+                case 0:
+                    //A,A#,B,C,C#,D,D#,E,F,F#,G,G#にソートする
+                    //メソッド化せずに実装した場合。これでいいのだろうか・・・
+                    item = SORT_STRING.substring(0, 28);
+                    break;
+                case 1:
+                    //A#,B,C,C#,D,D#,E,F,F#,G,G#,Aにソートする
+                    //メソッド化せずに実装した場合。
+                    item = SORT_STRING.substring(2, 30);
+                    break;
+                case 2:
+                    //B,C,C#,D,D#,E,F,F#,G,G#,A,A#にソートする
+                    //メソッド化せずに実装した場合。
+                    item = SORT_STRING.substring(5, 33);
+                    break;
+                case 3:
+                    //C,C#,D,D#,E,F,F#,G,G#,A,A#,Bにソートする
+                    //メソッド化せずに実装した場合。
+                    item = SORT_STRING.substring(7, 35);
+                    break;
+                case 4:
+                    //C#,D,D#,E,F,F#,G,G#,A,A#,B,Cにソートする
+                    //メソッド化せずに実装した場合。
+                    item = SORT_STRING.substring(9, 37);
+                    break;
+                case 5:
+                    //D,D#,E,F,F#,G,G#,A,A#,B,C,C#にソートする
+                    //メソッド化せずに実装した場合。
+                    item = SORT_STRING.substring(12, 40);
+                    break;
+                case 6:
+                    //D#,E,F,F#,G,G#,A,A#,B,C,C#,Dにソートする
+                    //メソッド化せずに実装した場合。
+                    item = SORT_STRING.substring(14, 42);
+                    break;
+                case 7:
+                    //E,F,F#,G,G#,A,A#,B,C,C#,D,D#にソートする
+                    //メソッド化せずに実装した場合。
+                    item = SORT_STRING.substring(17, 45);
+                    break;
+                case 8:
+                    //F,F#,G,G#,A,A#,B,C,C#,D,D#,Eにソートする
+                    //メソッド化せずに実装した場合。
+                    item = SORT_STRING.substring(19, 47);
+                    break;
+                case 9:
+                    //F#,G,G#,A,A#,B,C,C#,D,D#,E,Fにソートする
+                    //メソッド化せずに実装した場合。
+                    item = SORT_STRING.substring(21, 49);
+                    break;
+                case 10:
+                    //G,G#,A,A#,B,C,C#,D,D#,E,F,F#にソートする
+                    //メソッド化せずに実装した場合。
+                    item = SORT_STRING.substring(24, 52);
+                    break;
+                case 11:
+                    //G#,A,A#,B,C,C#,D,D#,E,F,F#,Gにソートする
+                    //メソッド化せずに実装した場合。
+                    item = SORT_STRING.substring(26);
+                    break;
+            }
+            //本来は不要。一旦配列用に切り出したStringが正しく切り出されているかここで確認。
+            dispSortTone.setText(item);
+
+            List<String> toneList = Arrays.asList(item.split(","));
+        }
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
     }
 }
