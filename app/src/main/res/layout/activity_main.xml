@@ -14,14 +14,6 @@
         android:text="@string/title_main_activity"
         android:textSize="24sp" />
 
-    <TextView
-        android:id="@+id/no_implement"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/no_implement"/>
-
             <RadioGroup
                 android:id="@+id/tone_select_Radio"
                 android:layout_marginTop="16dp"
