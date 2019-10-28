@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                     item = SORT_STRING_FLAT;
                 }else{
                     leftAdapter = ArrayAdapter.createFromResource(MainActivity.this, R.array.plus_tone, android.R.layout.simple_spinner_item);
-                    item = SORT_STRING_FLAT;
+                    item = SORT_STRING_SHARP;
                 }
                 leftSpinner.setAdapter(leftAdapter);
             }
