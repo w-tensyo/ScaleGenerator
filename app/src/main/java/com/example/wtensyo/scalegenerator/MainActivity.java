@@ -41,8 +41,13 @@ public class MainActivity extends AppCompatActivity {
 
         //activity_main.xmlのlvMenuを認識させるために呼び出し
         lvMenu = findViewById(R.id.lvMenu);
-
+        //仮で作成しているソート後のテキストを表示するエリアのTextViewを取得。
         dispSortTone = (TextView) findViewById(R.id.sort_tone_string);
+        //データ型変数leftToneSelectに入れる
+        leftToneSelect = (RadioButton) findViewById(R.id.tone_select_left);
+
+        //ラジオグループのチェック状態変更イベントを登録
+
 
         //まずはgetLeftSpinnerでLeftSpinnerでtoneListに配列を突っ込む
         getLeftSpinner();
@@ -63,9 +68,9 @@ public class MainActivity extends AppCompatActivity {
         //アダプタがスピナーの選択肢の一覧を表示するのに使うレイアウトを指定。
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+        //初期値として、itemにこれをつっこんでみた
+        item = SORT_STRING_SHARP;
         //ラジオボタンの判定
-        //データ型変数leftToneSelectに入れる
-        leftToneSelect = (RadioButton) findViewById(R.id.tone_select_left);
 
         leftToneSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -90,6 +95,9 @@ public class MainActivity extends AppCompatActivity {
         public void onItemSelected(AdapterView parent, View view, int position, long id) {
             Spinner spinner = (Spinner) parent;
 
+            //itemの中身を格納するString型の変数を用意
+            String itemSort = null;
+
             //選択されているアイテムのIndexを取得
             int idx = spinner.getSelectedItemPosition();
 
@@ -100,68 +108,68 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     //A,A#,B,C,C#,D,D#,E,F,F#,G,G#にソートする
                     //メソッド化せずに実装した場合。これでいいのだろうか・・・
-                    item = SORT_STRING_SHARP.substring(0, 28);
+                    itemSort = item.substring(0, 28);
                     break;
                 case 1:
                     //A#,B,C,C#,D,D#,E,F,F#,G,G#,Aにソートする
                     //メソッド化せずに実装した場合。
-                    item = SORT_STRING_SHARP.substring(2, 30);
+                    itemSort = item.substring(2, 30);
                     break;
                 case 2:
                     //B,C,C#,D,D#,E,F,F#,G,G#,A,A#にソートする
                     //メソッド化せずに実装した場合。
-                    item = SORT_STRING_SHARP.substring(5, 33);
+                    itemSort = item.substring(5, 33);
                     break;
                 case 3:
                     //C,C#,D,D#,E,F,F#,G,G#,A,A#,Bにソートする
                     //メソッド化せずに実装した場合。
-                    item = SORT_STRING_SHARP.substring(7, 35);
+                    itemSort = item.substring(7, 35);
                     break;
                 case 4:
                     //C#,D,D#,E,F,F#,G,G#,A,A#,B,Cにソートする
                     //メソッド化せずに実装した場合。
-                    item = SORT_STRING_SHARP.substring(9, 37);
+                    itemSort = item.substring(9, 37);
                     break;
                 case 5:
                     //D,D#,E,F,F#,G,G#,A,A#,B,C,C#にソートする
                     //メソッド化せずに実装した場合。
-                    item = SORT_STRING_SHARP.substring(12, 40);
+                    itemSort = item.substring(12, 40);
                     break;
                 case 6:
                     //D#,E,F,F#,G,G#,A,A#,B,C,C#,Dにソートする
                     //メソッド化せずに実装した場合。
-                    item = SORT_STRING_SHARP.substring(14, 42);
+                    itemSort = item.substring(14, 42);
                     break;
                 case 7:
                     //E,F,F#,G,G#,A,A#,B,C,C#,D,D#にソートする
                     //メソッド化せずに実装した場合。
-                    item = SORT_STRING_SHARP.substring(17, 45);
+                    itemSort = item.substring(17, 45);
                     break;
                 case 8:
                     //F,F#,G,G#,A,A#,B,C,C#,D,D#,Eにソートする
                     //メソッド化せずに実装した場合。
-                    item = SORT_STRING_SHARP.substring(19, 47);
+                    itemSort = item.substring(19, 47);
                     break;
                 case 9:
                     //F#,G,G#,A,A#,B,C,C#,D,D#,E,Fにソートする
                     //メソッド化せずに実装した場合。
-                    item = SORT_STRING_SHARP.substring(21, 49);
+                    itemSort = item.substring(21, 49);
                     break;
                 case 10:
                     //G,G#,A,A#,B,C,C#,D,D#,E,F,F#にソートする
                     //メソッド化せずに実装した場合。
-                    item = SORT_STRING_SHARP.substring(24, 52);
+                    itemSort = item.substring(24, 52);
                     break;
                 case 11:
                     //G#,A,A#,B,C,C#,D,D#,E,F,F#,Gにソートする
                     //メソッド化せずに実装した場合。
-                    item = SORT_STRING_SHARP.substring(26);
+                    itemSort = item.substring(26);
                     break;
             }
             //本来は不要。一旦配列用に切り出したStringが正しく切り出されているかここで確認。
-            dispSortTone.setText(item);
+            dispSortTone.setText(itemSort);
 
-            List<String> toneList = Arrays.asList(item.split(","));
+            List<String> toneList = Arrays.asList(itemSort.split(","));
 
             ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this,android.R.layout.simple_list_item_1,toneList);
 
