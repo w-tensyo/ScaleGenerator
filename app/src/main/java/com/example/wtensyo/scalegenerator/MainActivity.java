@@ -13,6 +13,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import java.util.Iterator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -170,6 +171,26 @@ public class MainActivity extends AppCompatActivity {
             dispSortTone.setText(itemSort);
 
             List<String> toneList = Arrays.asList(itemSort.split(","));
+
+
+            for(int i=0;i<toneList.size();i++){
+                //toneListのindex番号を参照して、toneToKey対象の配列を突っ込む。
+                String toneToKey = toneList.get(i);
+                //index番号0,5,7にmaj,2,4,9にm,11にm7(b5)
+                if(i == 0 || i == 5){
+                    toneToKey = toneToKey.concat(" maj");
+                }else if(i == 7){
+                    toneToKey = toneToKey.concat(" maj");
+                }else if(i == 2 || i ==4){
+                    toneToKey = toneToKey.concat(" m");
+                }else if(i == 9){
+                    toneToKey = toneToKey.concat(" m");
+                }else if(i ==11){
+                    toneToKey = toneToKey.concat(" m7(b5)");
+                }else{
+                }
+                toneList.set(i,toneToKey);
+            }
 
             ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this,android.R.layout.simple_list_item_1,toneList);
 
