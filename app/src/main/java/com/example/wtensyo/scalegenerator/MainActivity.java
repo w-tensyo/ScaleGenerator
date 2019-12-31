@@ -6,18 +6,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import java.util.Iterator;
-
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+
+//メモ　複数業のコメントアウト
+//Ctrl + Shift + /
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     String item = null;
     ListView lvMenu;
     ArrayList<String> toneList = new ArrayList<>();
+    Map<Integer, String> diatonicChordList;
     TextView dispSortTone;
 
     ArrayAdapter<CharSequence> leftAdapter;
@@ -172,27 +177,68 @@ public class MainActivity extends AppCompatActivity {
 
             List<String> toneList = Arrays.asList(itemSort.split(","));
 
-
-            for(int i=0;i<toneList.size();i++){
+            //まずは文字列をくっつける
+            for (int i = 0; i < toneList.size(); i++) {
                 //toneListのindex番号を参照して、toneToKey対象の配列を突っ込む。
                 String toneToKey = toneList.get(i);
                 //index番号0,5,7にmaj,2,4,9にm,11にm7(b5)
-                if(i == 0 || i == 5){
+                if (i == 0 || i == 5) {
                     toneToKey = toneToKey.concat(" maj");
-                }else if(i == 7){
+                } else if (i == 7) {
                     toneToKey = toneToKey.concat(" maj");
-                }else if(i == 2 || i ==4){
+                } else if (i == 2 || i == 4) {
                     toneToKey = toneToKey.concat(" m");
-                }else if(i == 9){
+                } else if (i == 9) {
                     toneToKey = toneToKey.concat(" m");
-                }else if(i ==11){
+                } else if (i == 11) {
                     toneToKey = toneToKey.concat(" m7(b5)");
-                }else{
+                } else {
+                toneList.set(i, toneToKey);
                 }
-                toneList.set(i,toneToKey);
             }
+            //iteratorを使って不要なコードを削除した
 
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this,android.R.layout.simple_list_item_1,toneList);
+            //Mapに突っ込むようのindex番号変数"j"を用意
+            int j = 0;
+            diatonicChordList = new HashMap<>();
+            for(int i = 0; i < toneList.size(); i++){
+                String toneToKey = toneList.get(i);
+
+                if(i == 1 || i ==3){
+                }else if(i == 6 || i ==8){
+                }else if(i == 10){
+                }else{
+                    diatonicChordList.put(j,diatonicChordList.get(i));
+                    j++;
+                }
+
+            }
+            j =0;
+            ArrayList<String> trimmedArrayList = new ArrayList<>(diatonicChordList.values());
+
+/*
+            for (Iterator<String> iterator = toneList.iterator(); iterator.hasNext();) {
+                int i = 0;
+                if (i == 1 || i == 3) {
+                //1,3番目を削除したい
+                    iterator.remove();
+                    i++;
+                }else if(i == 6|| i==8){
+                    //6,8番目を削除したい
+                    iterator.remove();
+                    i++;
+                }else if(i == 10){
+                    //10番目を削除したい
+                    iterator.remove();
+                    i++;
+                }else {
+                    i++;
+                }
+                i =0;
+            }
+*/
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this,android.R.layout.simple_list_item_1,trimmedArrayList);
 
             lvMenu.setAdapter(adapter);
         }
